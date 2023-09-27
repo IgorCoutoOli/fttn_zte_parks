@@ -1,0 +1,35 @@
+1#Não foi possível estabelecer uma conexão com a OLT.
+2#Por favor, insira um número de caixa válido. Exemplo: 2311120.
+3#Retornar ao Menu.
+4#Cancelar.
+5#Provisionar uma Caixa.
+6#Desprovisionar uma Caixa.
+7#Verificar Configurações da Caixa.
+8#Atualizar uma Caixa.
+9#Verificar MACs Conectados na Caixa.
+10#Reiniciar uma Caixa.
+11#Olá, Vetoriano! Bem-vindo ao BOT de gerenciamento de caixa FTTN. Como posso ajudá-lo hoje?
+12#Você gostaria de provisionar uma caixa?
+13#Você gostaria de desprovisionar uma caixa?
+14#Você gostaria de verificar uma caixa?
+15#Você gostaria de atualizar uma caixa?
+16#Você gostaria de verificar os MACs de uma caixa?
+17#Você gostaria de reiniciar uma caixa?
+18#Entendi, por favor, informe o número da caixa. Exemplo: 2311120.
+19#Entendi, por favor, informe o número de série. Exemplo: b80491.
+20#O comando de reinicialização foi enviado com sucesso.
+21#Não foi possível estabelecer uma conexão com a caixa.
+22#A caixa foi removida com sucesso.
+23#A caixa foi provisionada com sucesso, no entanto, está desatualizada. Por favor, proceda com a atualização.
+24#A caixa foi provisionada com sucesso.
+25#A caixa já está atualizada.
+26#A caixa foi atualizada com sucesso.
+100#O processo foi interrompido, mas nenhum erro específico foi identificado.
+101#Nenhuma informação encontrada.
+102#Há uma inconsistência no nome da caixa; verifique se foi digitado corretamente.
+103#O número de série informado não corresponde à PON onde a caixa está localizada. Verifique as configurações da caixa informada para encontrar o número de série correto.
+104#O número de série informado não está provisionado ou não está disponível para provisionamento. Verifique se foi digitado corretamente.
+105#Ocorreu um problema ao enviar as informações do número de série para a OLT. Remova a caixa e tente novamente.
+106#A caixa informada já está provisionada. Verifique se a caixa não está provisionada para outro número de série.
+107#Ocorreu um problema ao localizar o número de série configurado. Por favor, entre em contato com o NOC para verificar a causa.
+108#Ocorreu um problema ao tentar atualizar a caixa. Verifique se ela está operacional.
