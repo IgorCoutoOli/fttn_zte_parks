@@ -55,4 +55,7 @@ async def olt_check(olt):
 
 
 async def error_check(code):
+    if code == 0:
+        return None
+    
     return MSG[int(code)+100]
