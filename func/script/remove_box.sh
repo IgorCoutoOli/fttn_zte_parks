@@ -7,7 +7,7 @@ set PON [lindex $argv 3]
 set SERIAL [lindex $argv 4]
 set timeout 20
 
-spawn telnet IP
+spawn telnet $IP
 sleep 1
 expect "Press <RETURN> to get started"
 send "\n"
@@ -19,23 +19,22 @@ expect "*#"
 send "config terminal\n"
 
 expect {
+    "*(config)#" { send "interface gpon$PON\n" }
+}
+
+expect {
     "% Unknown command" {
         exit 2
     }
-  "*(config)#" { send "interface gpon$PON\n" }
+    "*(config-if)#" { send "no onu prks00$SERIAL\n" }
 }
 
 expect {
     "% Unknown command" {
-        exit 3
+        exit 9
     }
-  "*(config-if)#" { send "no onu prks00$SERIAL\n" }
+    "*(config-if)#" { send "exit\n" }
 }
-
-expect {
-  "*(config-if)#" { send "exit\n" }
-}
-
 
 expect "*#"
 exit 0

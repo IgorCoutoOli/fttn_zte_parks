@@ -29,7 +29,11 @@
 102#Há uma inconsistência no nome da caixa; verifique se foi digitado corretamente.
 103#O número de série informado não corresponde à PON onde a caixa está localizada. Verifique as configurações da caixa informada para encontrar o número de série correto.
 104#O número de série informado não está provisionado ou não está disponível para provisionamento. Verifique se foi digitado corretamente.
-105#Ocorreu um problema ao enviar as informações do número de série para a OLT. Remova a caixa e tente novamente.
+105#Ocorreu um problema ao enviar as informações do número de série para a OLT. Não foi possivel encontrar número de série disponível para provisionamento.
 106#A caixa informada já está provisionada. Verifique se a caixa não está provisionada para outro número de série.
 107#Ocorreu um problema ao localizar o número de série configurado. Por favor, entre em contato com o NOC para verificar a causa.
 108#Ocorreu um problema ao tentar atualizar a caixa. Verifique se ela está operacional.
+109#A caixa não está provisionada ou esse número de série não foi associado a ela. Favor conferir as configurações da caixa para encontrar a informação correta.
+110#Ocorreu um problema ao adicionar o profile de provisionamento para o número de serie na OLT, Por favor, entre em contato com o NOC para verificar a causa.
+111#Ocorreu um problema ao adicionar o vlan de gerencia para o número de serie na OLT, Por favor, entre em contato com o NOC para verificar a causa.
+112#Ocorreu um problema ao adicioanr alias com o nome da caixa para o número de serie na OLT, Verifique se a caixa já não esta com algum número de serie já configurado.

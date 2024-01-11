@@ -21,16 +21,13 @@ send "v3tf77n\n"
 expect "*#"
 send "config terminal\n"
 expect {
-    "*ERROR" { exit 7 }
-    "*Multiplexer" { exit 7 }
-    "*% Unknown command." { exit 7 }
     "*(config)#" { send "interface gpon$PORT\n" }
 }
 sleep 1
 expect {
-    "*ERROR" { exit 7 }
-    "*Multiplexer" { exit 7 }
-    "*% Unknown command." { exit 7 }
+    "*ERROR" { exit 2 }
+    "*Multiplexer" { exit 2 }
+    "*% Unknown command." { exit 2 }
     "*(config-if)#" { send "onu prks00$SERIE flow-profile $FLOW\n" }
 }
 sleep 1
@@ -42,6 +39,9 @@ expect {
 }
 sleep 1
 expect {
+    "*ERROR" { exit 7 }
+    "*Multiplexer" { exit 7 }
+    "*% Unknown command." { exit 7 }
     "*(config-if)#" { send "exit\n" }
 }
 expect "*#"

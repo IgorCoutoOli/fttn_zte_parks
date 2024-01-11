@@ -22,15 +22,12 @@ expect "*#"
 send "conf t\n"
 expect "*(config)#"
 expect {
-    "*ERROR" { exit 1 }
-    "*Multiplexer" { exit 1 }
-    "*% Unknown command." { exit 2 }
     "*(config)#" { send "interface gpon$PORT\n" }
 }
 expect {
-    "*ERROR" { exit 4 }
-    "*Multiplexer" { exit 4 }
-    "*% Unknown command." { exit 4 }
+    "*ERROR" { exit 2 }
+    "*Multiplexer" { exit 2 }
+    "*% Unknown command." { exit 2 }
     "*(config-if)#"	{ send "onu prks00$SERIE ip address $IP/24 gw $GW\n" }
 }
 expect {
@@ -40,20 +37,23 @@ expect {
     "*(config-if)#" { send "onu prks00$SERIE flow-profile 02_PROVISIONAMENTO\n" }
 }
 expect {
-    "*ERROR" { exit 5 }
-    "*Multiplexer" { exit 5 }
-    "*% Unknown command." { exit 5 }
+    "*ERROR" { exit 10 }
+    "*Multiplexer" { exit 10 }
+    "*% Unknown command." { exit 10 }
     "*(config-if)#" { send "onu prks00$SERIE vlan-translation-profile _100 iphost\n" }
 }
 expect {
-    "*ERROR" { exit 6 }
-    "*Multiplexer" { exit 6 }
-    "*% Unknown command." { exit 6 }
+    "*ERROR" { exit 11 }
+    "*Multiplexer" { exit 11 }
+    "*% Unknown command." { exit 11 }
     "*(config-if)#"	{ send "onu prks00$SERIE alias $ALIAS\n" }
 }
 expect {
+    "*ERROR" { exit 12 }
+    "*Multiplexer" { exit 12 }
+    "*% Unknown command." { exit 12 }
     "*(config-if)#" { send "exit\n" }
 }
 expect "*#"
-#send "exit\n"
+send "exit\n"
 exit 0
