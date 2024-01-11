@@ -121,7 +121,7 @@ async def reboot_box():
 
 async def remove_box():
     olt = information['box'][:3]
-    pon = information['box'][3:5]
+    pon = f"{information['box'][3]}/{information['box'][4]}"
 
     access = await olt_check(olt)
     info = {}
@@ -133,9 +133,16 @@ async def remove_box():
         return info
 
     info['status'] = 1
+    
+    print(access['IP'], access['USER'], access['PASS'], pon, information['serial'])
 
-    command = [f'{dir_file}/script/adding_box/remove_box.sh', access['IP'], access['USER'], access['PASS'], pon, information['serial']]
+    command = [f'{dir_file}/script/remove_box.sh', access['IP'], access['USER'], access['PASS'], pon, information['serial']]
     script = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = script.communicate()
+
+    # Verificar a saída e o erro
+    print(f"Saída do script:\n {stdout.decode()}")
+    print(f"Erro do script:\n {stderr.decode()}")
 
     error = await error_check(script.returncode)
 
@@ -152,9 +159,9 @@ async def remove_box():
 
 async def adding_box():
     olt = information['box'][:3]
+    gpon = f"{information['box'][3]}/{information['box'][4]}"
     pon = information['box'][3:5]
     slot = information['box'][5:].lstrip('0')
-    vlan = f"{pon[0]}/{pon[1]}"
     flow = f"{olt[1:3]}{pon}"
 
     ip = f'10.{olt}.{pon}.{slot}'
@@ -171,8 +178,15 @@ async def adding_box():
 
     info['status'] = 1
 
+    # Configurando parte das configurações na OLT
     command = [f'{dir_file}/script/adding_box/adding_olt_config.sh', access['IP'], access['USER'], access['PASS'], ip, gw, pon, information['box'], information['serial']]
     script = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = script.communicate()
+
+    # Verificar a saída e o erro
+    print(f"Saída do script:\n {stdout.decode()}")
+    print(f"Erro do script:\n {stderr.decode()}")
+
     error = await error_check(script.returncode)
 
     if error is not None:
@@ -184,12 +198,20 @@ async def adding_box():
         information['status'] = 0
         info["message"] = MSG[21]
         return info
-
+    
+    # Adicionando parte das configurações na ONU
     output = subprocess.check_output(f'snmpget -v2c -cparks {ip} iso.3.6.1.2.1.1.1.0', shell=True, universal_newlines=True)
     mode = output.split("(")[1].split(")")[0].strip()
+    
     if mode != "SFU":
         command = [f'{dir_file}/script/adding_box/adding_mode_bridge.sh', ip, information['box']]
         script = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = script.communicate()
+
+        # Verificar a saída e o erro
+        print(f"Saída do script:\n {stdout.decode()}")
+        print(f"Erro do script:\n {stderr.decode()}")
+        
         error = await error_check(script.returncode)
 
         if error is not None:
@@ -201,9 +223,16 @@ async def adding_box():
             information['status'] = 0
             info["message"] = MSG[21]
             return info
-
-    command = [f'{dir_file}/script/adding_box/adding_profile.sh', access['IP'], access['USER'], access['PASS'], vlan, pon, flow, information['serial']]
+    
+    # Ultima parte do provisionando na OLT.
+    command = [f'{dir_file}/script/adding_box/adding_profile.sh', access['IP'], access['USER'], access['PASS'], gpon, pon, flow, information['serial']]
     script = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = script.communicate()
+
+    # Verificar a saída e o erro
+    print(f"Saída do script:\n {stdout.decode()}")
+    print(f"Erro do script:\n {stderr.decode()}")
+    
     error = await error_check(script.returncode)
 
     if error is not None:
@@ -253,6 +282,12 @@ async def update_box():
     if version != "Version 2.7.2":
         command = [f'{dir_file}/script/update_box.sh', ip]
         script = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = script.communicate()
+
+        # Verificar a saída e o erro
+        print(f"Saída do script:\n {stdout.decode()}")
+        print(f"Erro do script:\n {stderr.decode()}")
+        
         error = await error_check(script.returncode)
 
         if error is not None:
