@@ -1,7 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes
 
-from conf.settings import information, MSG
+from conf.settings import information, MSG, BASE_API_URL
 from func.utils import channel_check
 
 from func.script import check_info, check_macs, reboot_box, remove_box, adding_box, update_box
@@ -24,10 +24,13 @@ async def filter_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif information['status'] == 1 or information['status'] == 2:
             result['message'] = MSG[19]
         elif information['status'] == 3:  # Verificar configurações
+            await context.bot.sendPhoto(chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], photo=BASE_API_URL + '102')
             result = await check_info()
         elif information['status'] == 4:  # Atualizar caixa
+            await context.bot.sendPhoto(chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], photo=BASE_API_URL + '102')
             result = await update_box()
         elif information['status'] == 5:  # Verificar MAC's conectados
+            await context.bot.sendPhoto(chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], photo=BASE_API_URL + '102')
             result = await check_macs()
         elif information['status'] == 6:  # Reiniciar caixa
             result = await reboot_box()
@@ -35,8 +38,10 @@ async def filter_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         information['serial'] = update.message.text.lower()
 
         if information['status'] == 1:  # Provisionamento
+            await context.bot.sendPhoto(chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], photo=BASE_API_URL + '102')
             result = await adding_box()
         elif information['status'] == 2:  # Desprovisionamento
+            await context.bot.sendPhoto(chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], photo=BASE_API_URL + '102')
             result = await remove_box()
 
     button_cancel = [
