@@ -19,7 +19,7 @@ async def channel_check(update: Update):
 
         if hasattr(update, 'message') and hasattr(update.message, 'message_thread_id'):
             thread_id = update.message.message_thread_id
-        elif hasattr(update, 'callback_query') and hasattr(update.callback_query.message, 'message_thread_id'):
+        elif hasattr(update, 'callback_query') and hasattr(update.callback_query, 'message') and hasattr(update.callback_query.message, 'message_thread_id'):
             thread_id = update.callback_query.message.message_thread_id
                 
         if update.effective_chat.id == info['CHANNEL_ID'] and thread_id == info['THEREAD_CHANNEL_ID']:
