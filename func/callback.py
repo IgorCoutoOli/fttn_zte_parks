@@ -44,5 +44,6 @@ async def callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await menu(update, context)
         return
     
-    await context.bot.send_message( chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], text=message)
+    await context.bot.send_message( chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], text=message, parse_mode='Markdown')
     await context.bot.send_message( chat_id=INFO['CHANNEL_ID'], message_thread_id=INFO['THEREAD_CHANNEL_ID'], text=MSG[18], reply_markup=InlineKeyboardMarkup(button_cancel))
+    return
