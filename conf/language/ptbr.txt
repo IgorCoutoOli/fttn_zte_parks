@@ -29,7 +29,7 @@
 102#Há uma inconsistência no nome da caixa; verifique se foi digitado corretamente.
 103#O número de série informado não corresponde à PON onde a caixa está localizada. Verifique as configurações da caixa informada para encontrar o número de série correto.
 104#O número de série informado não está provisionado ou não está disponível para provisionamento. Verifique se foi digitado corretamente.
-105#Ocorreu um problema ao enviar as informações do número de série para a OLT. Não foi possivel encontrar número de série disponível para provisionamento.
+105#**A ONU NÃO FOI ENCONTRADA PARA PROVISIONAMENTO**. Verifique se está conectada corretamente. Caso esteja, tente reiniciar o equipamento ou realizar a troca da ONU.
 106#A caixa informada já está provisionada. Verifique se a caixa não está provisionada para outro número de série.
 107#Ocorreu um problema ao localizar o número de série configurado. Por favor, entre em contato com o NOC para verificar a causa.
 108#Ocorreu um problema ao tentar atualizar a caixa. Verifique se ela está operacional.
